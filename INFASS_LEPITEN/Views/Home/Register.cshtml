@@ -37,6 +37,42 @@
                         <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                         <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                     </div>
+
+                    <!-- Age input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control"
+                               id="age"
+                               type="age"
+                               placeholder="Age" />
+
+                        <label>Age</label>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="mb-4">
+                        <label class="form-label d-block mb-2" style="font-size:1.5rem; color:#6c757d;">
+                            Gender
+                        </label>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="gender"
+                                   id="male"
+                                   value="Male">
+                            <label class="form-check-label" style="font-size:1.5rem; color:#6c757d;" for="male">Male</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="gender"
+                                   id="female"
+                                   value="Female">
+                            <label class="form-check-label" style="font-size:1.5rem; color:#6c757d;" for="female">Female</label>
+                        </div>
+                    </div>
+
                     <!--Login input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
@@ -97,3 +133,62 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#contactForm").submit(function (e) {
+
+                e.preventDefault();
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Home/Register",
+
+                        data: {
+                            FullName: $("#fullName").val(),
+                            Email: $("#email").val(),
+                            Age: $("#age").val(),
+                            Gender: $("input[name='gender']:checked").val(),
+                            Username: $("#username").val(),
+                            Password: $("#password").val(),
+                            ConfirmPassword: $("#confirmPassword").val()
+                        },
+
+                    // data: {
+
+                    //     fullName: $("#fullName").val(),
+                    //     email: $("#email").val(),
+                    //     age: $("#age").val(),
+                    //     gender: $("input[name='gender']:checked").val(),
+                    //     username: $("#username").val(),
+                    //     password: $("#password").val(),
+                    //     confirmPassword: $("#confirmPassword").val()
+
+                    // },
+
+                    success: function (response) {
+
+                        alert(response);
+
+                    },
+
+                    error: function () {
+
+                        alert("Something went wrong.");
+
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+}
