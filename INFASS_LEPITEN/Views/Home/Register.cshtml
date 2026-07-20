@@ -23,10 +23,10 @@
                 <!-- To make this form functional, sign up at-->
                 <!-- https://startbootstrap.com/solution/contact-forms-->
                 <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <form id="contactForm" >
                     <!-- Name input-->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                        <input class="form-control" id="fullName" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                         <label for="name">Full name</label>
                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                     </div>
@@ -75,7 +75,7 @@
 
                     <!--Login input-->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                        <input class="form-control" id="username" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                         <label for="name">Username</label>
                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                     </div>
@@ -159,17 +159,6 @@
                             ConfirmPassword: $("#confirmPassword").val()
                         },
 
-                    // data: {
-
-                    //     fullName: $("#fullName").val(),
-                    //     email: $("#email").val(),
-                    //     age: $("#age").val(),
-                    //     gender: $("input[name='gender']:checked").val(),
-                    //     username: $("#username").val(),
-                    //     password: $("#password").val(),
-                    //     confirmPassword: $("#confirmPassword").val()
-
-                    // },
 
                     success: function (response) {
 

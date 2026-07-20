@@ -7,7 +7,7 @@ namespace INFASS_LEPITEN.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        UserModel user = new UserModel();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -29,41 +29,28 @@ namespace INFASS_LEPITEN.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(UserModel user)
+        public string Register(
+                string fullName,
+                string email,
+                int age,
+                string gender,
+                string username,
+                string password,
+                string confirmPassword)
         {
-            string message =
-                $"Full Name: {user.FullName}\n" +
-                $"Email: {user.Email}\n" +
-                $"Age: {user.Age}\n" +
-                $"Gender: {user.Gender}\n" +
-                $"Username: {user.Username}\n" +
-                $"Password: {user.Password}\n" +
-                $"Confirm Password: {user.ConfirmPassword}";
+            UserModel user = new UserModel();
 
-            return Json(message);
+            string query = user.Sql(
+                fullName,
+                email,
+                age,
+                gender,
+                username,
+                password,
+                confirmPassword);
+
+            return query;
         }
-
-        //[HttpPost]
-        //public IActionResult Register(
-        //   string fullName,
-        //   string email,
-        //   int age,
-        //   string gender,
-        //   string username,
-        //   string password,
-        //   string confirmPassword)
-        //{
-        //    string result =
-        //        $"Full Name: {fullName}\n" +
-        //        $"Email: {email}\n" +
-        //        $"Age: {age}\n" +
-        //        $"Gender: {gender}\n" +
-        //        $"Username: {username}\n" +
-        //        $"Password: {password}\n" +
-        //        $"Confirm Password: {confirmPassword}";
-
-        //    return Content(result);
-        //}
 
         public IActionResult Privacy()
         {
