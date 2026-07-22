@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Xml.Linq;
 using INFASS_LEPITEN.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,22 +33,16 @@ namespace INFASS_LEPITEN.Controllers
         public string Register(
                 string fullName,
                 string email,
-                int age,
+                string age,
                 string gender,
                 string username,
                 string password,
                 string confirmPassword)
         {
-            UserModel user = new UserModel();
 
-            string query = user.Sql(
-                fullName,
-                email,
-                age,
-                gender,
-                username,
-                password,
-                confirmPassword);
+            string[] fields = ["FullName", "Email", "Age", "Gender", "Username", "Password", "ConfirmPassword"];
+            string[] values = [fullName, email, age, gender, username, password, confirmPassword];
+            string query = user._Sql(fields, values, "user");
 
             return query;
         }
