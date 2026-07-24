@@ -46,11 +46,18 @@ namespace INFASS_LEPITEN.Models
             query += ") VALUES (";
         for (int i = 0; i<values.Length; i++)
         {
-            query += "'" + values[i] + "'";
+                if (fields[i] == "Age")
+                {
+                    query += values[i];
+                }
+                else
+                {
+                    query += "'" + values[i] + "'";
+                }
 
-            if (i<values.Length - 1)
-                query += ",";
-        }
+                if (i < values.Length - 1)
+                    query += ",";
+            }
             query += ");";
  
             return query;
