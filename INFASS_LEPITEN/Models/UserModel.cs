@@ -30,7 +30,9 @@ namespace INFASS_LEPITEN.Models
         //        username + "','" +
         //        password + "','" +
         //        confirmPassword + "')";
-        public String _Sql(string[] fields, string[] values, string tbName)
+
+        //----------------------------------------------------------INSERT CODE-------------------------------------------------------------------
+        public String _Insert(string[] fields, string[] values, string tbName)
         {
  
         
@@ -46,20 +48,69 @@ namespace INFASS_LEPITEN.Models
             query += ") VALUES (";
         for (int i = 0; i<values.Length; i++)
         {
-                if (fields[i] == "Age")
+                if (int.TryParse(values[i], out _))
                 {
+                    // If value is a number, no quotes
                     query += values[i];
                 }
                 else
                 {
+                    // Otherwise, add quotes
                     query += "'" + values[i] + "'";
                 }
+
 
                 if (i < values.Length - 1)
                     query += ",";
             }
             query += ");";
  
+            return query;
+        }
+
+        //-----------------------------------------UPDATE CODE-----------------------------------------------------
+        public string _Update(string[] fields, string[] values, string tbName, string condition)
+        {
+            string query = "UPDATE " + tbName + " SET ";
+
+            for (int i = 0; i < fields.Length; i++)
+            {
+                query += fields[i] + "=";
+
+                if (decimal.TryParse(values[i], out _))
+                {
+                    // Numeric value (no quotes)
+                    query += values[i];
+                }
+                else
+                {
+                    // String value (with quotes)
+                    query += "'" + values[i] + "'";
+                }
+
+                if (i < fields.Length - 1)
+                    query += ",";
+            }
+
+            query += " WHERE " + condition + ";";
+
+            return query;
+        }
+
+        //-------------------------------------------DELETE CODE-------------------------------------------------------
+        public string _Delete(string tbName, string condition)
+        {
+            string query = "DELETE FROM " + tbName +
+                           " WHERE " + condition + ";";
+
+            return query;
+        }
+
+        //-------------------------------------VIEW ALL-----------------------------------------
+        public string _ViewAll(string tbName)
+        {
+            string query = "SELECT * FROM " + tbName + ";";
+
             return query;
         }
     }

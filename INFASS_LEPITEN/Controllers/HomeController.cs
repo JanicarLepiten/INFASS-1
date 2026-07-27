@@ -39,10 +39,17 @@ namespace INFASS_LEPITEN.Controllers
                 string password,
                 string confirmPassword)
         {
+            //-----------------OLD CODE----------------------------------
+            //string[] fields = ["FullName", "Email", "Age", "Gender", "Username", "Password", "ConfirmPassword"];
+            //string[] values = [fullName, email, age, gender, username, password, confirmPassword];
 
+            //-----------------------------------------------NEW CODE------------------------------------------------------
             string[] fields = ["FullName", "Email", "Age", "Gender", "Username", "Password", "ConfirmPassword"];
-            string[] values = [fullName, email, age, gender, username, password, confirmPassword];
-            string query = user._Sql(fields, values, "user");
+            string[] values = ["Janicar" , "janicar2124@gmail.com" , "21" , "Female" , "Jani" , "jani" , "jani"];
+            //string query = user._Insert(fields, values, "user");
+            //string query = user._Update(fields,values,"user","UserId=2");
+            string query = user._Delete("user","UserId=1");
+            //string query = user._ViewAll("Users");
 
             return query;
         }
